@@ -1,4 +1,4 @@
-package java.records.demo;
+package com.suspendfun;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
