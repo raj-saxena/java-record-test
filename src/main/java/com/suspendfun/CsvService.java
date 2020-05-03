@@ -15,7 +15,7 @@ public class CsvService {
 
     public CsvService(ResourceLoader resourceLoader) {
         logger.info("Loading data");
-        var schema = CsvSchema.builder().build();
+        var schema = CsvSchema.builder().addColumn("name").addColumn("status").setSkipFirstDataRow(true).build();
         try {
             var csv = resourceLoader.getResource("classpath:data/file.csv").getInputStream();
             records = CsvUtil.loadCsv(CsvRecord.class, schema, csv);
