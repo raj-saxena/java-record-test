@@ -9,8 +9,12 @@ import java.io.InputStream;
 import java.util.List;
 
 public class CsvUtil {
-    public static <T> List<T> loadCsv(Class<T> type, CsvSchema csvSchema, InputStream inputStream) throws IOException {
+    public static <T> List<T> loadCsv(Class<T> type, CsvSchema csvSchema, InputStream inputStream) {
         ObjectReader objectReader = new CsvMapper().findAndRegisterModules().readerFor(type);
-        return objectReader.with(csvSchema).<T>readValues(inputStream).readAll();
+        try {
+            return objectReader.with(csvSchema).<T>readValues(inputStream).readAll();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
